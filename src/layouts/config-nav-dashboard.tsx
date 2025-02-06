@@ -14,12 +14,51 @@ export const navData = [
     icon: icon('ic-analytics'),
   },
   {
+    title: 'Company',
+    path: '/company',
+    icon: icon('ic-company'),
+    // submenu: [
+    //   {
+    //     title: 'Company',
+    //     path: '/company',
+    //   },
+    //   {
+    //     title: 'Branch',
+    //     path: '/branch',
+    //   },
+    //   {
+    //     title: 'Department',
+    //     path: '/department',
+    //   },
+    // ],
+  },
+  {
+    title: 'Branch',
+    path: '/branch',
+    icon: icon('ic-branch'),
+  },
+  {
+    title: 'Department',
+    path: '/department',
+    icon: icon('ic-department'),
+  },
+  {
+    title: 'Employee',
+    path: '/employee',
+    icon: icon('ic-user'),
+  },
+  {
     title: 'User',
     path: '/user',
     icon: icon('ic-user'),
   },
   {
-    title: 'Product',
+    title: 'Role',
+    path: '/role',
+    icon: icon('role'),
+  },
+  {
+    title: 'Attendance',
     path: '/products',
     icon: icon('ic-cart'),
     info: (
@@ -29,7 +68,7 @@ export const navData = [
     ),
   },
   {
-    title: 'Blog',
+    title: 'Live',
     path: '/blog',
     icon: icon('ic-blog'),
   },

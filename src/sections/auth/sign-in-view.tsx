@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import UserService from 'src/service/UserService';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
@@ -8,67 +9,74 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
-
-import { useRouter } from 'src/routes/hooks';
-
 import { Iconify } from 'src/components/iconify';
 
-// ----------------------------------------------------------------------
-
 export function SignInView() {
-  const router = useRouter();
-
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSignIn = useCallback(() => {
-    router.push('/');
-  }, [router]);
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const userData = await UserService.login(username, password);
+      if (userData.token) {
+        localStorage.setItem('token', userData.token);
+        localStorage.setItem('role', userData.roles);
+        localStorage.setItem('email', userData.email);
+        localStorage.setItem('firstName', userData.firstName);
+
+        navigate('/');
+        window.location.reload();
+      } else {
+        setError(userData.message);
+      }
+    } catch (err) {  // <-- "error" emas, "err" ishlatildi
+      console.log(err);
+      setError(err.message);
+      setTimeout(() => {
+        setError('');
+      }, 5000);
+    }
+  }, [username, password, navigate]);
 
   const renderForm = (
-    <Box display="flex" flexDirection="column" alignItems="flex-end">
+    <Box component="form" onSubmit={handleSubmit} display="flex" flexDirection="column" alignItems="flex-end">
       <TextField
         fullWidth
         name="email"
         label="Email address"
-        defaultValue="hello@gmail.com"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
         InputLabelProps={{ shrink: true }}
         sx={{ mb: 3 }}
       />
-
-      <Link variant="body2" color="inherit" sx={{ mb: 1.5 }}>
-        Forgot password?
-      </Link>
 
       <TextField
         fullWidth
         name="password"
         label="Password"
-        defaultValue="@demo1234"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         InputLabelProps={{ shrink: true }}
         type={showPassword ? 'text' : 'password'}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                <Iconify icon={showPassword ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
         sx={{ mb: 3 }}
       />
+      {error && <Typography variant="body2" color="error" sx={{ mb: 2 }}>{error}</Typography>}
 
       <LoadingButton
         fullWidth
         size="large"
-        type="submit"
+        type="submit"  // <--- Correct way inside form
         color="inherit"
         variant="contained"
-        onClick={handleSignIn}
       >
         Sign in
       </LoadingButton>
     </Box>
+
   );
 
   return (

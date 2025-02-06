@@ -17,7 +17,7 @@ export function NavUpgrade({ sx, ...other }: StackProps) {
       sx={{ mb: 4, textAlign: 'center', ...sx }}
       {...other}
     >
-      <Typography
+      {/* <Typography
         variant="h6"
         sx={(theme) => ({
           ...textGradient(
@@ -30,7 +30,7 @@ export function NavUpgrade({ sx, ...other }: StackProps) {
       <Typography variant="body2" sx={{ color: 'text.secondary', mt: 0.5 }}>
         {`From only `}
         <Box component="strong" sx={{ color: 'text.primary' }}>
-          $69
+          $5
         </Box>
       </Typography>
 
@@ -42,13 +42,13 @@ export function NavUpgrade({ sx, ...other }: StackProps) {
       />
 
       <Button
-        href="https://material-ui.com/store/items/minimal-dashboard/"
+        href="https://t.me/sirliboyevumurzoq/"
         target="_blank"
         variant="contained"
         color="inherit"
       >
         Upgrade to Pro
-      </Button>
+      </Button> */}
     </Box>
   );
 }

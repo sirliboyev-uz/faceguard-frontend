@@ -34,6 +34,8 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
 
   const [openPopover, setOpenPopover] = useState<HTMLButtonElement | null>(null);
 
+
+
   const handleOpenPopover = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
     setOpenPopover(event.currentTarget);
   }, []);
@@ -49,6 +51,15 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
     },
     [handleClosePopover, router]
   );
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('email')
+    localStorage.removeItem('firstName')
+  
+    handleClosePopover();
+    router.push('/sign-in');
+  }, [handleClosePopover, router]);
 
   return (
     <>
@@ -64,8 +75,8 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
         }}
         {...other}
       >
-        <Avatar src={_myAccount.photoURL} alt={_myAccount.displayName} sx={{ width: 1, height: 1 }}>
-          {_myAccount.displayName.charAt(0).toUpperCase()}
+        <Avatar src={_myAccount.photoURL} alt={_myAccount.displayName || 'Guest'} sx={{ width: 1, height: 1 }}>
+          {_myAccount.displayName || 'Guest'.charAt(0).toUpperCase()}
         </Avatar>
       </IconButton>
 
@@ -87,7 +98,7 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
           </Typography>
 
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {_myAccount?.email}
+            {_myAccount?.email || 'Guest'}
           </Typography>
         </Box>
 
@@ -129,9 +140,9 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <Box sx={{ p: 1 }}>
-          <Button fullWidth color="error" size="medium" variant="text">
-            Logout
-          </Button>
+        <Button fullWidth color="error" size="medium" variant="text" onClick={handleLogout}>
+  Logout
+</Button>
         </Box>
       </Popover>
     </>

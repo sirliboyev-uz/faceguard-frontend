@@ -12,10 +12,11 @@ import {
 } from './_mock';
 
 // ----------------------------------------------------------------------
-
+const email = localStorage.getItem('email');
+const firstName = localStorage.getItem('firstName');
 export const _myAccount = {
-  displayName: 'Jaydon Frankie',
-  email: 'demo@minimals.cc',
+  displayName: firstName,
+  email : email || 'test',
   photoURL: '/assets/images/avatar/avatar-25.webp',
 };
 

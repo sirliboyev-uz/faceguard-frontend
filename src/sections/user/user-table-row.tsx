@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
@@ -9,26 +8,32 @@ import MenuList from '@mui/material/MenuList';
 import TableCell from '@mui/material/TableCell';
 import IconButton from '@mui/material/IconButton';
 import MenuItem, { menuItemClasses } from '@mui/material/MenuItem';
-
 import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
 
-// ----------------------------------------------------------------------
+export type Role = {
+  id: string;
+  roleName: string;
+  permissions: string[];
+};
 
 export type UserProps = {
   id: string;
-  name: string;
-  role: string;
-  status: string;
-  company: string;
-  avatarUrl: string;
-  isVerified: boolean;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  username: string;
+  role: Role;
+  enabled: boolean;
+  accountNonLocked: boolean;
+  // imageUrl field is no longer needed since we are using the mapping endpoint.
 };
 
 type UserTableRowProps = {
   row: UserProps;
   selected: boolean;
-  onSelectRow: () => void;
+  onSelectRow: (id: string) => void;
 };
 
 export function UserTableRow({ row, selected, onSelectRow }: UserTableRowProps) {
@@ -42,26 +47,34 @@ export function UserTableRow({ row, selected, onSelectRow }: UserTableRowProps) 
     setOpenPopover(null);
   }, []);
 
+  const handleCheckboxChange = () => {
+    onSelectRow(row.id);
+  };
+
+  // Construct the image URL using the custom endpoint /avata/{userId}
+  const imageUrl = `http://localhost:8080/api/v1/user/avatar/${row.id}`;
+
   return (
     <>
       <TableRow hover tabIndex={-1} role="checkbox" selected={selected}>
         <TableCell padding="checkbox">
-          <Checkbox disableRipple checked={selected} onChange={onSelectRow} />
+          <Checkbox disableRipple checked={selected} onChange={handleCheckboxChange} />
         </TableCell>
 
         <TableCell component="th" scope="row">
           <Box gap={2} display="flex" alignItems="center">
-            <Avatar alt={row.name} src={row.avatarUrl} />
-            {row.name}
+            {/* Displaying the Avatar using the /avata/{userId} endpoint */}
+            <Avatar alt={`${row.firstName} ${row.lastName}`} src={imageUrl} />
+            {row.firstName} {row.lastName}
           </Box>
         </TableCell>
 
-        <TableCell>{row.company}</TableCell>
+        <TableCell>{row.email}</TableCell>
 
-        <TableCell>{row.role}</TableCell>
+        <TableCell>{row.role.roleName}</TableCell>
 
         <TableCell align="center">
-          {row.isVerified ? (
+          {row.enabled ? (
             <Iconify width={22} icon="solar:check-circle-bold" sx={{ color: 'success.main' }} />
           ) : (
             '-'
@@ -69,7 +82,9 @@ export function UserTableRow({ row, selected, onSelectRow }: UserTableRowProps) 
         </TableCell>
 
         <TableCell>
-          <Label color={(row.status === 'banned' && 'error') || 'success'}>{row.status}</Label>
+          <Label color={row.accountNonLocked ? 'success' : 'error'}>
+            {row.accountNonLocked ? 'Active' : 'Locked'}
+          </Label>
         </TableCell>
 
         <TableCell align="right">

@@ -18,8 +18,8 @@ export default function App() {
   const githubButton = (
     <Fab
       size="medium"
-      aria-label="Github"
-      href="https://github.com/minimal-ui-kit/material-kit-react"
+      aria-label="telegram"
+      href="https://telegram.me/sirliboyevumurzoq"
       sx={{
         zIndex: 9,
         right: 20,
@@ -31,7 +31,7 @@ export default function App() {
         color: 'common.white',
       }}
     >
-      <Iconify width={24} icon="eva:github-fill" />
+      <Iconify width={24} icon="eva:paper-plane-outline" />
     </Fab>
   );
 
