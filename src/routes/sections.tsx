@@ -30,6 +30,8 @@ export const PermissionDeniedView = lazy(() => import('src/pages/permission-deni
 export const RolePage = lazy(() => import('src/pages/role-page'));
 export const EmployeePage = lazy(() => import('src/pages/employee-page'));
 export const EmployeeCreatePage = lazy(() => import('src/pages/employee-create-page'));
+export const FaceDetection = lazy(() => import('src/pages/face-detection-page'));
+
 
 
 
@@ -79,6 +81,7 @@ export function Router() {
             { path: 'role', element: <RolePage /> },
             { path: 'employee', element: <EmployeePage /> },
             { path: 'emp-register', element: <EmployeeCreatePage /> },
+            { path: 'visitor', element: <FaceDetection /> },
 
 
 
