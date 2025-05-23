@@ -106,6 +106,25 @@ Your optimized files will be in `/build`. Deploy to any static-file host.
 
 ---
 
+## Screenshots
+
+*Manage company, branch, department with location and department counts.*
+![image](https://github.com/user-attachments/assets/983bc39c-cef4-4156-9284-1ed2ba281ede)
+![image](https://github.com/user-attachments/assets/c836523d-73e4-4c7f-b230-3a6d1f0ae8f4)
+![image](https://github.com/user-attachments/assets/b4e4fb57-51d4-46b9-8d82-b5fab141f1a0)
+
+*Employee CRUD.*
+![image](https://github.com/user-attachments/assets/c4098461-61e3-4e11-85fe-92bb416cf00c)
+
+*Users CRUD.*
+![image](https://github.com/user-attachments/assets/daf1d4f3-ebbd-4d9d-a7d3-2fec5b687a4f)
+
+*Roles CRUD.*
+![image](https://github.com/user-attachments/assets/5e7d1cd1-bf60-4430-829b-46af5304b4e9)
+![image](https://github.com/user-attachments/assets/ad5ecffa-9fde-469e-b90b-18cece6f3347)
+
+---
+
 ## Contributing
 
 1. Fork the repo
