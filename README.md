@@ -73,7 +73,7 @@ yarn install
 ## Running Locally
 
 ```bash
-# npm run dev
+# start dev server
 npm start
 # or
 yarn start
