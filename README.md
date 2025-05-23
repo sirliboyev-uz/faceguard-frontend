@@ -1,4 +1,4 @@
-````markdown
+
 # FaceGuard Frontend
 
 A React-based administrative dashboard for **FaceGuard** — a face-recognition attendance and visitor management system.  
@@ -127,7 +127,7 @@ Distributed under the MIT License. See `LICENSE` for more details.
 ## Contact
 
 FaceGuard Team · \[[sirliboyevuz@gmail.com](sirliboyevuz@gmail.com)]
-Project Link: [https://github.com/sirliboyev-uz/faceguard-frontend](https://github.com/your-org/faceguard-frontend)
+Project Link: [https://github.com/sirliboyev-uz/faceguard-frontend](https://github.com/sirliboyev-uz/faceguard-frontend)
 
 ```
 
